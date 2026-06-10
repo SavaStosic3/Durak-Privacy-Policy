@@ -54,8 +54,8 @@ respond.
 
 Durak offers optional one-time purchases for cosmetic theme packs. They are
 purely cosmetic and never change game rules, bot strength, stats, skill scoring,
-achievements, or offline play. Every paid pack can also be earned for free
-through achievements.
+achievements, or offline play. Separate cosmetic themes can be earned for free
+through achievements; the paid packs are unlocked only by purchase.
 
 Purchases are handled entirely by the Apple App Store or Google Play. Those
 stores process your payment and any associated data under their own privacy
