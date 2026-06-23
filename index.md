@@ -20,10 +20,10 @@ Developer: Sava Stosic
   sends a small amount of data — a nickname, an avatar, a device-generated player
   id, and your in-game moves — to the Durak game server so you can share a table
   with other players.
-- **Online accounts are optional.** You can create an account (email + password,
-  or Google / Sign in with Apple) to play online under a unique public username,
-  track online stats, and add friends across devices. Offline play never needs
-  an account, and online play can still be used as a guest.
+- **Online accounts are optional.** You can create an account (with an email and
+  password) to play online under a unique public username, track online stats,
+  and add friends across devices. Offline play never needs an account, and online
+  play can still be used as a guest.
 - Durak has **no ads, no analytics SDKs, and no tracking.**
 - The only purchases are optional cosmetic theme packs, processed by the Apple
   App Store or Google Play; Durak does not receive your payment details.
@@ -98,9 +98,7 @@ friends across devices. Offline play never requires an account.
 When you sign up or sign in, your email address and password are processed and
 stored by Firebase Authentication on our behalf; the developer never sees or
 stores your raw password. We use your email to identify and verify your account
-and to let you reset your password. If you choose Google or Sign in with Apple,
-that provider shares your email (for Apple, optionally a private-relay email)
-to create the account.
+and to let you reset your password.
 
 **What an account stores.** With an account, the server stores the following in
 Google Firestore, keyed to your account:
@@ -172,8 +170,7 @@ social SDKs.
   policy (<https://firebase.google.com/support/privacy>). This is used only to
   operate accounts — not for advertising, analytics, or tracking.
 - **Apple App Store / Google Play** process payments for optional cosmetic
-  purchases and distribute the app. If you use Sign in with Apple or Google
-  sign-in, that provider also processes your sign-in under its own policy.
+  purchases and distribute the app.
 
 These providers process data under their own privacy policies. The app is also
 distributed through web hosting platforms, which may process data under their own
