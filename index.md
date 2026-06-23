@@ -20,8 +20,11 @@ Developer: Sava Stosic
   sends a small amount of data — a nickname, an avatar, a device-generated player
   id, and your in-game moves — to the Durak game server so you can share a table
   with other players.
-- Durak has **no accounts or sign-in, no ads, no analytics SDKs, and no
-  tracking.**
+- **Online accounts are optional.** You can create an account (email + password,
+  or Google / Sign in with Apple) to play online under a unique public username,
+  track online stats, and add friends across devices. Offline play never needs
+  an account, and online play can still be used as a guest.
+- Durak has **no ads, no analytics SDKs, and no tracking.**
 - The only purchases are optional cosmetic theme packs, processed by the Apple
   App Store or Google Play; Durak does not receive your payment details.
 
@@ -70,8 +73,8 @@ hand — the server sends each player only their own hand.
 **Network information and Cloudflare.** Connecting to the server necessarily
 reveals your device's IP address and connection metadata to Cloudflare, which
 provides the server infrastructure and protects it from abuse. Cloudflare
-processes this information as our infrastructure provider under its own
-[privacy policy](https://www.cloudflare.com/privacypolicy/).
+processes this information as our infrastructure provider under its own privacy
+terms (<https://www.cloudflare.com/privacypolicy/>).
 
 **Retention and deletion.** The server keeps room and match data only for the
 life of the room. When a room finishes or goes idle it is deleted automatically,
@@ -81,7 +84,56 @@ archive. Your nickname, avatar, and player id live on your device — delete the
 app or clear its local storage to remove them. For any privacy question or
 request, contact us at the address below.
 
-**No accounts.** Online play does not create an account or ask you to sign in.
+**Optional accounts.** You can play online as a guest (nickname, avatar, and the
+device player id only), or sign in with an account for a named identity, online
+stats, and friends — see *Online Accounts* below.
+
+## Online Accounts
+
+Online accounts are optional. You can play online as a guest, or create an
+account to play under a unique public username, keep online stats, and add
+friends across devices. Offline play never requires an account.
+
+**Authentication.** Accounts use **Firebase Authentication**, a Google service.
+When you sign up or sign in, your email address and password are processed and
+stored by Firebase Authentication on our behalf; the developer never sees or
+stores your raw password. We use your email to identify and verify your account
+and to let you reset your password. If you choose Google or Sign in with Apple,
+that provider shares your email (for Apple, optionally a private-relay email)
+to create the account.
+
+**What an account stores.** With an account, the server stores the following in
+Google Firestore, keyed to your account:
+
+- your email (held by Firebase Authentication);
+- your chosen **public username** — unique, permanent, and visible to other
+  players;
+- your **online stats** (games played, wins, losses, and win streaks), which
+  other players can view on your profile;
+- your **friends** list and friend requests, and your **blocked-users** list;
+- reports you file about other players, to keep online play safe.
+
+The developer is the controller of this data and operates it on Google's
+Firebase / Firestore and Cloudflare infrastructure. We do not use it for
+advertising, tracking, or analytics, and we do not sell it.
+
+**Cross-device.** Signing in on another device gives you the same account,
+username, stats, and friends. Offline stats, achievements, saved games, and
+cosmetics stay on each device and are not part of your account.
+
+**Safety and moderation.** Usernames are user-generated and are screened against
+a profanity blocklist and a reserved-name list. You can **report** a player and
+**block** another user from the in-app Friends screen; reports are reviewed by
+the developer, who may remove a username or terminate an account for abuse.
+
+**Retention and deletion.** Account data is kept until you delete your account.
+You can delete it at any time in the app under **Profile → Account → Delete
+account** — deletion is immediate and permanent, removing your account and
+sign-in credentials, your username and its reservation, your online stats, and
+your friends and blocks. If you cannot open the app, see our **Delete Your
+Account** page (`/delete-account/`) or email the contact below. Limited,
+non-identifying safety records (such as abuse reports) may be retained briefly
+as needed to keep online play safe, and are then deleted.
 
 ## Optional Bug Reports
 
@@ -114,8 +166,14 @@ social SDKs.
 - **Cloudflare** provides the hosting and network infrastructure for online
   multiplayer and processes connection data (such as your IP address) when you
   play online.
+- **Google Firebase** provides authentication (Firebase Authentication) and the
+  account database (Firestore) for optional online accounts, processing your
+  account email and the account data described above under Google's privacy
+  policy (<https://firebase.google.com/support/privacy>). This is used only to
+  operate accounts — not for advertising, analytics, or tracking.
 - **Apple App Store / Google Play** process payments for optional cosmetic
-  purchases and distribute the app.
+  purchases and distribute the app. If you use Sign in with Apple or Google
+  sign-in, that provider also processes your sign-in under its own policy.
 
 These providers process data under their own privacy policies. The app is also
 distributed through web hosting platforms, which may process data under their own
@@ -123,9 +181,11 @@ policies when you use them.
 
 ## Children
 
-Durak does not knowingly collect personal data from children. Online play lets
-players choose a nickname that other players can see; please do not include
-personal information in your nickname.
+Durak does not knowingly collect personal data from children. Online play and
+online accounts (which involve interacting with and being visible to other
+players) are intended for players age 13 and older. Online play lets players
+choose a nickname or username that other players can see; please do not include
+personal information in it.
 
 ## Changes
 
@@ -135,8 +195,4 @@ released.
 
 ## Contact
 
-Privacy contact: [sava.stosic3@gmail.com](mailto:sava.stosic3@gmail.com).
-
-## Support
-
-Support page: [Durak Support](https://savastosic3.github.io/Durak-Support/).
+Privacy contact: sava.stosic3@gmail.com.
