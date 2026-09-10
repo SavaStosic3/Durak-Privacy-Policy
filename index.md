@@ -83,10 +83,11 @@ terms (<https://www.cloudflare.com/privacypolicy/>).
 **Retention and deletion.** The server keeps room and match data only for the
 life of the room. When a room finishes or goes idle it is deleted automatically,
 and a public room's listing is removed shortly after the room is no longer
-joinable. The server keeps no long-term account, profile, history, or match
-archive. Your nickname, avatar, and player id live on your device — delete the
-app or clear its local storage to remove them. For any privacy question or
-request, contact us at the address below.
+joinable. **Playing as a guest leaves nothing behind:** with no account there is
+no profile, no history and no match archive on the server, and your name,
+avatar, and player id live only on your device. If you do have an account, the
+account data described under *Online Accounts* below is kept until you delete it.
+For any privacy question or request, contact us at the address below.
 
 **Optional accounts.** You can play online as a guest (avatar and the device
 player id only, shown to others as a seat number), or sign in with an account
@@ -99,15 +100,25 @@ account to play under a unique public username, keep online stats, and add
 friends across devices. Offline play never requires an account.
 
 **Authentication.** Accounts use **Firebase Authentication**, a Google service.
-When you sign up or sign in, your email address and password are processed and
-stored by Firebase Authentication on our behalf; the developer never sees or
-stores your raw password. We use your email to identify and verify your account
-and to let you reset your password.
+You can sign in in three ways: with an **email address and password**, with
+**Google**, or with **Sign in with Apple**. Whichever you choose, Firebase
+Authentication processes and stores the sign-in details on our behalf and gives
+us an account identifier and your email address; the developer never sees or
+stores your raw password.
+
+If you sign in with Google or with Apple, that provider tells us the email
+address associated with the account you choose — and no more than that. We do
+not receive your Google or Apple password, contacts, or any other profile
+information, and we do not post anything to those accounts. **Sign in with Apple
+lets you hide your real address behind a private relay address; if you do, that
+relay address is all we ever hold.** We use your email to identify your account,
+verify it, and let you reset a password if you have one.
 
 **What an account stores.** With an account, the server stores the following in
 Google Firestore, keyed to your account:
 
-- your email (held by Firebase Authentication);
+- your email and which sign-in method you used — email/password, Google, or
+  Apple (both held by Firebase Authentication);
 - your chosen **public username** — unique, permanent, and visible to other
   players;
 - your **online stats** (games played, wins, losses, and win streaks), which
@@ -204,8 +215,11 @@ store to confirm ownership when you use "Restore Purchases".
 
 ## Third Parties
 
-Durak does not include third-party advertising, analytics, authentication, or
-social SDKs.
+Durak includes **no third-party advertising, analytics, or tracking SDKs of any
+kind.** It does use third-party **authentication** for optional online accounts,
+which is listed below; that is the only category of third-party SDK in the app,
+it runs only if you choose to create an account, and it is never used for
+advertising or tracking.
 
 - **Cloudflare** provides the hosting and network infrastructure for online
   multiplayer and processes connection data (such as your IP address) when you
@@ -215,6 +229,10 @@ social SDKs.
   account email and the account data described above under Google's privacy
   policy (<https://firebase.google.com/support/privacy>). This is used only to
   operate accounts — not for advertising, analytics, or tracking.
+- **Google Sign-In** and **Sign in with Apple** are offered as optional ways to
+  create or access an account. They run only if you choose one of them, and each
+  gives us only an account identifier and an email address, under Google's
+  privacy policy above and Apple's (<https://www.apple.com/legal/privacy/>).
 - **Apple App Store / Google Play** process payments for optional cosmetic
   purchases and distribute the app.
 
