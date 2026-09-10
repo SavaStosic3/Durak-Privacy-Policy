@@ -4,7 +4,7 @@ title: Durak Privacy Policy
 
 # Durak Privacy Policy
 
-Last updated: 2026-06-22
+Last updated: 2026-09-10
 
 This privacy policy covers Durak, a free card game for iOS, Android, and web.
 Durak can be played offline against computer opponents, and also offers an
@@ -17,9 +17,10 @@ Developer: Sava Stosic
 - **Offline play** collects no personal data. Your games, settings, stats, and
   saves stay on your device.
 - **Online multiplayer is optional.** When you choose to play online, Durak
-  sends a small amount of data — a nickname, an avatar, a device-generated player
-  id, and your in-game moves — to the Durak game server so you can share a table
-  with other players.
+  sends a small amount of data — an avatar, a device-generated player id, and
+  your in-game moves — to the Durak game server so you can share a table with
+  other players. The name in your profile is **not** part of that: it stays on
+  your device.
 - **Online accounts are optional.** You can create an account (with an email and
   password) to play online under a unique public username, track online stats,
   and add friends across devices. Offline play never needs an account, and online
@@ -35,7 +36,8 @@ Durak stores some game data locally on your device so the app can work:
 - gameplay settings;
 - saved or resumable games;
 - local stats;
-- your profile nickname and avatar;
+- the name in your profile, and your avatar (the name never leaves your
+  device);
 - a device-generated player id (used to identify your profile to the game server
   and other players during online play);
 - which cosmetic theme packs you own (earned or purchased);
@@ -56,18 +58,20 @@ Cloudflare's Workers and Durable Objects platform.
 **What the app sends to the server.** To seat you at an online table, Durak
 transmits:
 
-- your nickname (the display name from your profile; you choose it, and it may be
-  shown to other players);
 - your selected avatar;
 - a device-generated player id (a random identifier created on your device that
   identifies your profile to the server; it is not your name, email, or an
   advertising/tracking id);
 - the room code, match settings, and the moves you make during a game.
 
-**What other players can see.** Players in the same room see your nickname and
-avatar. If you host a public room, your nickname and the table's basic details
-(game mode, deck size, and seat counts) appear in the in-app public room list
-that other players can browse. Durak never shows other players the cards in your
+**What other players can see.** Players in the same room see your **username**
+if you have an account with one, and your avatar. If you do not have a username
+— because you are playing as a guest — they see only a seat number, such as
+"Guest 2". The name in your profile is never shown to anyone: it is yours, it
+stays on your device, and other players never receive it. If you host a public
+room, your username (or "Guest") and the table's basic details (game mode, deck
+size, and seat counts) appear in the in-app public room list that other players
+can browse. Durak never shows other players the cards in your
 hand — the server sends each player only their own hand.
 
 **Network information and Cloudflare.** Connecting to the server necessarily
@@ -84,9 +88,9 @@ archive. Your nickname, avatar, and player id live on your device — delete the
 app or clear its local storage to remove them. For any privacy question or
 request, contact us at the address below.
 
-**Optional accounts.** You can play online as a guest (nickname, avatar, and the
-device player id only), or sign in with an account for a named identity, online
-stats, and friends — see *Online Accounts* below.
+**Optional accounts.** You can play online as a guest (avatar and the device
+player id only, shown to others as a seat number), or sign in with an account
+for a named identity, online stats, and friends — see *Online Accounts* below.
 
 ## Online Accounts
 
@@ -108,6 +112,8 @@ Google Firestore, keyed to your account:
   players;
 - your **online stats** (games played, wins, losses, and win streaks), which
   other players can view on your profile;
+- your **online rating** (Elo), which other players can view on your profile
+  and alongside your name in an online room;
 - your **friends** list and friend requests, and your **blocked-users** list;
 - reports you file about other players, to keep online play safe.
 
@@ -122,16 +128,56 @@ cosmetics stay on each device and are not part of your account.
 **Safety and moderation.** Usernames are user-generated and are screened against
 a profanity blocklist and a reserved-name list. You can **report** a player and
 **block** another user from the in-app Friends screen; reports are reviewed by
-the developer, who may remove a username or terminate an account for abuse.
+the developer, who may remove a username or terminate an account for abuse. If
+an account is banned for abuse and is then deleted, we keep its **username** —
+and only the name and the date, with no link to the account or its owner — so
+that the name cannot be claimed again by that player or by anyone else.
+
+**Online rating.** Rated online games change a public rating (Elo) calculated
+entirely on the server from the result of the match. Your rating is visible to
+other players. Only public games between verified accounts with no bots are
+rated; private games, games with bots, and guest games never change it.
+
+**Rating records.** So that a rating change can be explained or corrected if
+something goes wrong, the server keeps one record per rated match containing
+the match identifier, the accounts that took part, each player's rating before
+and after, the result, and the time. **These records are automatically deleted
+one week after the match.** They never contain your cards, the deck order, or a
+replay of the game.
 
 **Retention and deletion.** Account data is kept until you delete your account.
 You can delete it at any time in the app under **Profile → Account → Delete
 account** — deletion is immediate and permanent, removing your account and
-sign-in credentials, your username and its reservation, your online stats, and
-your friends and blocks. If you cannot open the app, see our **Delete Your
-Account** page (`/delete-account/`) or email the contact below. Limited,
-non-identifying safety records (such as abuse reports) may be retained briefly
-as needed to keep online play safe, and are then deleted.
+sign-in credentials, your username and its reservation (with the one exception
+below), your online stats, your online rating, and your friends and blocks. If you cannot open the app, see our
+**Delete Your Account** page (`/delete-account/`) or email the contact below.
+
+One thing survives a deletion permanently, and only in one case: if your account
+was **banned** for abuse before you deleted it, the username is kept so it cannot
+be claimed again, as described under Safety and moderation above. It is retained
+as a name and a date with no identifier of you attached.
+
+Three further kinds of record can briefly outlive your account and are then
+deleted automatically:
+
+- **Rating records** for matches you played in the previous week (described
+  above, kept at most one week from the match).
+- **Safety records** — abuse reports you filed about other players, which are
+  **deleted 30 days after the report was filed**. Your identifier is removed
+  from those when you delete your account, and reports filed *about* you are
+  deleted with it, so neither still names you.
+- **A record that the deletion happened**, which is your account identifier, the
+  word "deleted", and the time — nothing else, and nothing about you or your
+  play. Your sign-in credential stays valid for up to an hour after it is
+  withdrawn, and this is the only thing that tells our server the account behind
+  it is gone; without it, a credential still in flight could bring the account
+  back. It is **deleted automatically 24 hours** after the deletion completes,
+  by which time no such credential can still exist. If a deletion is interrupted
+  part-way, the same record is what lets you resume it, and it is kept for up to
+  30 days so that you can.
+
+The first two are shared history describing other players too, which is why they
+expire on their own fixed schedule rather than being erased on request.
 
 ## Optional Bug Reports
 
@@ -146,8 +192,8 @@ respond.
 ## In-App Purchases
 
 Durak offers optional one-time purchases for cosmetic theme packs. They are
-purely cosmetic and never change game rules, bot strength, stats, skill scoring,
-achievements, or offline play. Separate cosmetic themes can be earned for free
+purely cosmetic and never change game rules, bot strength, stats, achievements,
+or offline play. Separate cosmetic themes can be earned for free
 through achievements; the paid packs are unlocked only by purchase.
 
 Purchases are handled entirely by the Apple App Store or Google Play. Those
@@ -180,9 +226,59 @@ policies when you use them.
 
 Durak does not knowingly collect personal data from children. Online play and
 online accounts (which involve interacting with and being visible to other
-players) are intended for players age 13 and older. Online play lets players
-choose a nickname or username that other players can see; please do not include
-personal information in it.
+players) are for players **age 13 and older**, and the app asks you to confirm
+you are before your first online game. Online play lets players choose a
+username that other players can see; please do not include personal information
+in it.
+
+**Playing offline needs none of this.** Games against the bots collect no
+personal data, involve no other players, and are available without an account,
+without an age confirmation, and without ever going online.
+
+If you believe a child under 13 has created an account, email us at the address
+below and we will delete it and its data.
+
+## Your Rights
+
+These rights apply to everyone. If you are in the UK, the EU, or the EEA, the
+GDPR gives them to you by law; we apply them to every player regardless of where
+you live, because it would be strange not to.
+
+**You can ask us to:**
+
+- **Give you a copy of your data** — everything the account holds: your email
+  and sign-in methods, your username, your online stats, your rating and the
+  record of your rated matches, your friends and blocks, and any abuse reports
+  you filed. You get it as a JSON file, which is a structured, machine-readable
+  format you can keep or take elsewhere.
+- **Correct anything that is wrong.** Your name and avatar you can change
+  yourself under **Profile → Account**. Your username is permanent by design —
+  it is how other players know you — so ask us if it needs to change.
+- **Delete your account and its data.** You do not need to ask: it is in the app
+  under **Profile → Account → Delete account**, and it is immediate. The
+  **Delete Your Account** page (`/delete-account/`) explains exactly what is
+  removed and the few things that briefly outlive it.
+- **Object to or restrict what we do with your data**, or withdraw your consent.
+  In practice, an account exists to let you play online under a name, so
+  withdrawing consent and deleting the account amount to the same thing.
+
+**How to ask.** Email **support.durak@gmail.com** from the address on your
+account. We will confirm you control that address — otherwise anyone could ask
+for your data — and then answer.
+
+**How long it takes, and what it costs.** Within **30 days**, and free. If a
+request is unusually complex we may take longer, and we will tell you why before
+the 30 days are up.
+
+**What we cannot include.** A copy of your data will not contain other players'
+identifiers, or anything that would identify another person — for example, who
+reported you. The law is explicit that your right of access does not override
+someone else's privacy. We will always tell you what was held back and why.
+
+**If we get it wrong.** You can complain to your local data-protection
+authority. In the UK that is the Information Commissioner's Office
+(`ico.org.uk`); in the EU it is the supervisory authority for the country you
+live in.
 
 ## Changes
 
@@ -192,4 +288,4 @@ released.
 
 ## Contact
 
-Privacy contact: sava.stosic3@gmail.com.
+Privacy contact: support.durak@gmail.com.

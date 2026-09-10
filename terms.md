@@ -5,7 +5,7 @@ permalink: /terms/
 
 # Durak Terms of Service & End User License Agreement
 
-Last updated: 2026-06-22
+Last updated: 2026-09-10
 
 These terms ("Terms") govern your use of Durak, a card game app for iOS,
 Android, and web ("the App"), developed by Sava Stosic ("we", "us"). By
@@ -98,4 +98,4 @@ the revised Terms.
 
 ## 10. Contact
 
-Questions about these Terms: sava.stosic3@gmail.com.
+Questions about these Terms: support.durak@gmail.com.
