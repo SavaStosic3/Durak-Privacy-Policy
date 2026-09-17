@@ -4,7 +4,7 @@ title: Durak Privacy Policy
 
 # Durak Privacy Policy
 
-Last updated: 2026-09-10
+Last updated: 2026-09-17
 
 This privacy policy covers Durak, a free card game for iOS, Android, and web.
 Durak can be played offline against computer opponents, and also offers an
@@ -19,8 +19,9 @@ Developer: Sava Stosic
 - **Online multiplayer is optional.** When you choose to play online, Durak
   sends a small amount of data — an avatar, a device-generated player id, and
   your in-game moves — to the Durak game server so you can share a table with
-  other players. The name in your profile is **not** part of that: it stays on
-  your device.
+  other players. The private name you edit in your Durak profile is **not** part
+  of that: it stays on your device. Information received during Google or Apple
+  sign-in is separate and is described under *Online Accounts*.
 - **Online accounts are optional.** You can create an account (with an email and
   password) to play online under a unique public username, track online stats,
   and add friends across devices. Offline play never needs an account, and online
@@ -36,8 +37,8 @@ Durak stores some game data locally on your device so the app can work:
 - gameplay settings;
 - saved or resumable games;
 - local stats;
-- the name in your profile, and your avatar (the name never leaves your
-  device);
+- the private name you edit in your Durak profile, and your avatar (the edited
+  name stays on your device);
 - a device-generated player id (used to identify your profile to the game server
   and other players during online play);
 - which cosmetic theme packs you own (earned or purchased);
@@ -67,8 +68,8 @@ transmits:
 **What other players can see.** Players in the same room see your **username**
 if you have an account with one, and your avatar. If you do not have a username
 — because you are playing as a guest — they see only a seat number, such as
-"Guest 2". The name in your profile is never shown to anyone: it is yours, it
-stays on your device, and other players never receive it. If you host a public
+"Guest 2". The private name you edit in your Durak profile stays on your device
+and is not shown to other players. If you host a public
 room, your username (or "Guest") and the table's basic details (game mode, deck
 size, and seat counts) appear in the in-app public room list that other players
 can browse. Durak never shows other players the cards in your
@@ -80,14 +81,15 @@ provides the server infrastructure and protects it from abuse. Cloudflare
 processes this information as our infrastructure provider under its own privacy
 terms (<https://www.cloudflare.com/privacypolicy/>).
 
-**Retention and deletion.** The server keeps room and match data only for the
-life of the room. When a room finishes or goes idle it is deleted automatically,
-and a public room's listing is removed shortly after the room is no longer
-joinable. **Playing as a guest leaves nothing behind:** with no account there is
-no profile, no history and no match archive on the server, and your name,
-avatar, and player id live only on your device. If you do have an account, the
-account data described under *Online Accounts* below is kept until you delete it.
-For any privacy question or request, contact us at the address below.
+**Retention and deletion.** The server stores the current room state to run
+the game and reconnect players. Room cleanup removes that state when the room
+closes or expires; public listings are removed through directory cleanup.
+These operations can be delayed by failures or retries. Guest play also leaves
+operational connection records, so ending a room does not erase every server
+or provider record immediately. There is no online replay archive.
+Account records, operational logs and recovery copies have separate lifecycles
+described below. For any privacy question or request, contact us at the address
+below.
 
 **Optional accounts.** You can play online as a guest (avatar and the device
 player id only, shown to others as a seat number), or sign in with an account
@@ -102,25 +104,37 @@ friends across devices. Offline play never requires an account.
 **Authentication.** Accounts use **Firebase Authentication**, a Google service.
 You can sign in in three ways: with an **email address and password**, with
 **Google**, or with **Sign in with Apple**. Whichever you choose, Firebase
-Authentication processes and stores the sign-in details on our behalf and gives
-us an account identifier and your email address; the developer never sees or
-stores your raw password.
+Authentication processes sign-in credentials, account/provider identifiers,
+email and verification status, and tokens used to authenticate you. The
+developer never sees or stores your raw password.
 
-If you sign in with Google or with Apple, that provider tells us the email
-address associated with the account you choose — and no more than that. We do
-not receive your Google or Apple password, contacts, or any other profile
-information, and we do not post anything to those accounts. **Sign in with Apple
-lets you hide your real address behind a private relay address; if you do, that
-relay address is all we ever hold.** We use your email to identify your account,
-verify it, and let you reset a password if you have one.
+Google sign-in can also provide your name and profile-photo URL to the sign-in
+software and Firebase Authentication. Apple can provide a name depending on
+the sign-in flow and consent; previously provided names can remain in Firebase.
+Apple does not provide a profile-photo URL. We do not receive your Google or
+Apple password or contacts, and we do not post to those accounts. **Sign in
+with Apple lets you use a private relay email address instead of sharing your
+real email address.** Account identifiers and any supplied profile information
+are separate from that email choice. We use your email for account access,
+verification and password resets where applicable.
 
-**What an account stores.** With an account, the server stores the following in
-Google Firestore, keyed to your account:
+Durak does not use a provider name or photo as your in-game identity. Your
+public username and chosen preset avatar serve that purpose. The private name
+you edit in Durak stays on your device. Ignoring unused provider profile fields
+in the app does not remove them from Firebase Authentication or the provider's
+records. They follow the account-closure and provider-retention processes
+described below; deleting a Durak account does not delete your Google or Apple
+account.
 
-- your email and which sign-in method you used — email/password, Google, or
-  Apple (both held by Firebase Authentication);
+**What an account stores.** Firebase Authentication stores your sign-in account,
+including your email, sign-in methods, identifiers and any provider name or
+photo URL it retains. This is separate from Google Firestore, where the Durak
+server stores the following, keyed to your account:
+
 - your chosen **public username** — unique, permanent, and visible to other
   players;
+- your selected **preset avatar**, synchronized across your signed-in devices.
+  The editable name in your local profile is not synchronized with your account;
 - your **online stats** (games played, wins, losses, and win streaks), which
   other players can view on your profile;
 - your **online rating** (Elo), which other players can view on your profile
@@ -140,9 +154,12 @@ cosmetics stay on each device and are not part of your account.
 a profanity blocklist and a reserved-name list. You can **report** a player and
 **block** another user from the in-app Friends screen; reports are reviewed by
 the developer, who may remove a username or terminate an account for abuse. If
-an account is banned for abuse and is then deleted, we keep its **username** —
-and only the name and the date, with no link to the account or its owner — so
-that the name cannot be claimed again by that player or by anyone else.
+an account is banned for abuse and is then deleted, we keep its **username**,
+ban-reservation status and reservation date to prevent reuse and impersonation.
+The reservation no longer holds the account identifier or email, but a
+recognizable username can still identify its former owner. It has no automatic
+expiry. The developer reviews these reservations at least quarterly and on a
+correction request, and removes those no longer needed or created in error.
 
 **Online rating.** Rated online games change a public rating (Elo) calculated
 entirely on the server from the result of the match. Your rating is visible to
@@ -152,43 +169,79 @@ rated; private games, games with bots, and guest games never change it.
 **Rating records.** So that a rating change can be explained or corrected if
 something goes wrong, the server keeps one record per rated match containing
 the match identifier, the accounts that took part, each player's rating before
-and after, the result, and the time. **These records are automatically deleted
-one week after the match.** They never contain your cards, the deck order, or a
-replay of the game.
+and after, the result, and the time. **These records become eligible for
+automatic deletion seven days after the server writes them.** That can be later
+than the match itself if saving was delayed. Deletion is asynchronous, so the
+expiry time is not a guaranteed physical-deletion deadline. They never contain
+your cards, the deck order, or a replay of the game.
 
-**Retention and deletion.** Account data is kept until you delete your account.
-You can delete it at any time in the app under **Profile → Account → Delete
-account** — deletion is immediate and permanent, removing your account and
-sign-in credentials, your username and its reservation (with the one exception
-below), your online stats, your online rating, and your friends and blocks. If you cannot open the app, see our
-**Delete Your Account** page (`/delete-account/`) or email the contact below.
+**Account closure.** Account data is kept while the account is active. You can
+request deletion under **Profile → Online account → Delete account**. When
+deletion succeeds, it removes the active Firebase sign-in account, the Durak
+account/profile, online stats and rating, friends and blocks, and the username
+reservation unless it was banned. This cannot be undone in the app. A failed or
+interrupted request may need a retry or support assistance; starting a deletion
+is not confirmation that every step finished. If you cannot open the app, see
+our **Delete Your Account** page (`/delete-account/`) or email the contact below.
 
-One thing survives a deletion permanently, and only in one case: if your account
-was **banned** for abuse before you deleted it, the username is kept so it cannot
-be claimed again, as described under Safety and moderation above. It is retained
-as a name and a date with no identifier of you attached.
+**Records that can outlive account closure:**
 
-Three further kinds of record can briefly outlive your account and are then
-deleted automatically:
+- **Rating and integrity records** explain results, prevent duplicate credits,
+  and investigate failed rating updates. Match records and failed-update records
+  receive a seven-day expiry when written; rewriting a failed-update record
+  restarts its expiry. Duplicate-credit markers also receive a seven-day expiry
+  when written and are removed with the account during successful deletion.
+  Shared match records and failed-update records can still contain your account
+  identifier until they are purged.
+- **Safety reports** become eligible for deletion 30 days after filing, whether
+  reviewed or not. On successful account-data deletion, reports matched to your
+  account as their subject are removed, and your reporter identifier on reports
+  about others is replaced. Reports about an unresolved username instead follow
+  the report expiry. Review notes can still identify people; replacing an
+  identifier does not make the remaining record anonymous.
+- **Deletion records** hold an account identifier, deletion state and
+  timestamps to block access and allow retries. A completed-deletion record is
+  assigned an expiry 24 hours after completion is recorded. A pending record
+  is assigned an expiry 30 days after the latest deletion attempt. Expiry does
+  not itself finish an interrupted deletion or erase its remaining data.
+- **Banned username reservations** are retained without automatic expiry and
+  reviewed as described under Safety and moderation.
+- **Room and matchmaking records**, including room-directory and active-match
+  reservations, are cleared by server cleanup rather than an account-deletion
+  deadline. They can contain account or guest identifiers while cleanup is
+  outstanding.
 
-- **Rating records** for matches you played in the previous week (described
-  above, kept at most one week from the match).
-- **Safety records** — abuse reports you filed about other players, which are
-  **deleted 30 days after the report was filed**. Your identifier is removed
-  from those when you delete your account, and reports filed *about* you are
-  deleted with it, so neither still names you.
-- **A record that the deletion happened**, which is your account identifier, the
-  word "deleted", and the time — nothing else, and nothing about you or your
-  play. Your sign-in credential stays valid for up to an hour after it is
-  withdrawn, and this is the only thing that tells our server the account behind
-  it is gone; without it, a credential still in flight could bring the account
-  back. It is **deleted automatically 24 hours** after the deletion completes,
-  by which time no such credential can still exist. If a deletion is interrupted
-  part-way, the same record is what lets you resume it, and it is kept for up to
-  30 days so that you can.
+For records with an expiry, managed database cleanup runs after that time and
+can be delayed. We distinguish removal from active use, eligibility for cleanup,
+and physical deletion rather than promising that all copies disappear at once.
 
-The first two are shared history describing other players too, which is why they
-expire on their own fixed schedule rather than being erased on request.
+## Operational Records and Recovery Copies
+
+Connection and diagnostic records help operate the service, investigate faults
+and prevent abuse. Cloudflare and authentication providers process network and
+security information separately from account and match records. Their retention
+depends on the service and its configuration; deleting a Durak account does not
+immediately remove every provider log or recovery copy.
+
+Firebase states that authentication IP logs last a few weeks and that other
+authentication data is removed from its live and backup systems within 180 days
+after we initiate deletion of the associated user with Firebase Authentication.
+An interrupted Durak request may not have reached that step. This is a
+provider-specific commitment, not a
+deadline for every record Durak or another provider holds. Provider security,
+service-operation and legal records may follow different, longer periods.
+Provider backups and any configured database backups or exports have their own
+expiry and deletion processes. We restrict recovery copies to recovery and
+security purposes. Before restored
+account data returns to service, it must be checked against subsequent deletions
+and expired data; a backup must not be used to reactivate a deleted account.
+
+Support messages and exports you send are used to handle your request. They are
+reviewed for deletion when no longer needed; any continued retention for a
+specific dispute, safety investigation or legal obligation must have a documented
+reason and review date. These are separate from the automatic match/report
+expiry periods. Apple, Google and email providers also retain their own account,
+transaction or service records under their respective policies.
 
 ## Optional Bug Reports
 
@@ -226,13 +279,15 @@ advertising or tracking.
   play online.
 - **Google Firebase** provides authentication (Firebase Authentication) and the
   account database (Firestore) for optional online accounts, processing your
-  account email and the account data described above under Google's privacy
+  authentication details, available provider profile information and the
+  account data described above under Google's privacy
   policy (<https://firebase.google.com/support/privacy>). This is used only to
   operate accounts — not for advertising, analytics, or tracking.
-- **Google Sign-In** and **Sign in with Apple** are offered as optional ways to
-  create or access an account. They run only if you choose one of them, and each
-  gives us only an account identifier and an email address, under Google's
-  privacy policy above and Apple's (<https://www.apple.com/legal/privacy/>).
+- **Google Sign-In** and **Sign in with Apple** are optional ways to create or
+  access an account. Their sign-in flows can provide the identifiers, email
+  and profile information described under Online Accounts. Provider processing
+  also includes security and connection information, under Google's privacy
+  policy above and Apple's (<https://www.apple.com/legal/privacy/>).
 - **Apple App Store / Google Play** process payments for optional cosmetic
   purchases and distribute the app.
 
@@ -264,18 +319,22 @@ you live, because it would be strange not to.
 
 **You can ask us to:**
 
-- **Give you a copy of your data** — everything the account holds: your email
-  and sign-in methods, your username, your online stats, your rating and the
+- **Give you a copy of your data** — everything the account holds: your email,
+  sign-in methods and retained authentication profile information, your
+  username, your online stats, your rating and the
   record of your rated matches, your friends and blocks, and any abuse reports
   you filed. You get it as a JSON file, which is a structured, machine-readable
   format you can keep or take elsewhere.
-- **Correct anything that is wrong.** Your name and avatar you can change
-  yourself under **Profile → Account**. Your username is permanent by design —
-  it is how other players know you — so ask us if it needs to change.
+- **Correct anything that is wrong.** Change your private Durak name and preset
+  avatar under **Profile → Edit profile**. That does not change your Google or
+  Apple profile or remove previously retained authentication information;
+  contact us about information held with your Durak sign-in account. Your
+  username is permanent by design — it is how other players know you — so ask
+  us if it needs to change.
 - **Delete your account and its data.** You do not need to ask: it is in the app
-  under **Profile → Account → Delete account**, and it is immediate. The
-  **Delete Your Account** page (`/delete-account/`) explains exactly what is
-  removed and the few things that briefly outlive it.
+  under **Profile → Online account → Delete account**. The **Delete Your
+  Account** page (`/delete-account/`) explains the completion/retry process and
+  the records that can outlive account closure.
 - **Object to or restrict what we do with your data**, or withdraw your consent.
   In practice, an account exists to let you play online under a name, so
   withdrawing consent and deleting the account amount to the same thing.
