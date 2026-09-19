@@ -4,7 +4,7 @@ title: Durak Privacy Policy
 
 # Durak Privacy Policy
 
-Last updated: 2026-09-17
+Last updated: 2026-09-18
 
 This privacy policy covers Durak, a free card game for iOS, Android, and web.
 Durak can be played offline against computer opponents, and also offers an
@@ -22,10 +22,10 @@ Developer: Sava Stosic
   other players. The private name you edit in your Durak profile is **not** part
   of that: it stays on your device. Information received during Google or Apple
   sign-in is separate and is described under *Online Accounts*.
-- **Online accounts are optional.** You can create an account (with an email and
-  password) to play online under a unique public username, track online stats,
-  and add friends across devices. Offline play never needs an account, and online
-  play can still be used as a guest.
+- **Online accounts are optional.** You can create an account with an email and
+  password, Google, or Sign in with Apple to play online under a unique public
+  username, track online stats, and add friends across devices. Offline play
+  never needs an account, and online play can still be used as a guest.
 - Durak has **no ads, no analytics SDKs, and no tracking.**
 - The only purchases are optional cosmetic theme packs, processed by the Apple
   App Store or Google Play; Durak does not receive your payment details.
@@ -52,8 +52,7 @@ device or browser controls.
 
 Online multiplayer is optional — Durak never requires it, and offline play works
 with no network connection. When you create, join, or browse online rooms, the
-app connects to the Durak game server at
-`durak-server.sava-stosic3.workers.dev`, operated by the developer on
+app connects to the Durak game server, operated by the developer on
 Cloudflare's Workers and Durable Objects platform.
 
 **What the app sends to the server.** To seat you at an online table, Durak
@@ -256,23 +255,30 @@ respond.
 ## In-App Purchases
 
 Durak offers optional one-time purchases for cosmetic theme packs. They are
-purely cosmetic and never change game rules, bot strength, stats, achievements,
-or offline play. Separate cosmetic themes can be earned for free
-through achievements; the paid packs are unlocked only by purchase.
+purely cosmetic and never change game rules, bot strength, stats, ratings, or
+offline play. A confirmed purchase or restore also unlocks the on-device
+"Supporting the Cause" achievement, which has no gameplay effect. Separate
+cosmetic themes can be earned for free through achievements; the paid packs are
+unlocked only by purchase.
 
 Purchases are handled entirely by the Apple App Store or Google Play. Those
 stores process your payment and any associated data under their own privacy
-policies; Durak does not receive your payment card or billing details. After a
-purchase, Durak stores only a local record that you own the pack and asks the
-store to confirm ownership when you use "Restore Purchases".
+policies; Durak does not receive your payment card or billing details. Durak
+stores only a local record of the packs you own. On iOS and Android, each time
+the app starts it also asks the store for pack prices and for purchases you
+already own, so an interrupted or later-approved purchase can still be
+delivered. "Restore Purchases" repeats that check. Durak does not send your
+purchases to its own server.
 
 ## Third Parties
 
 Durak includes **no third-party advertising, analytics, or tracking SDKs of any
-kind.** It does use third-party **authentication** for optional online accounts,
-which is listed below; that is the only category of third-party SDK in the app,
-it runs only if you choose to create an account, and it is never used for
-advertising or tracking.
+kind.** The app bundles two kinds of third-party software: sign-in software for
+optional online accounts, which runs only when you sign in or create an account
+and then keeps you signed in, and an in-app purchase library that contacts the
+App Store or Google Play each time the app starts on iOS or Android. Durak uses
+neither for advertising or tracking. The providers behind them, and the services
+that host online play, are listed below.
 
 - **Cloudflare** provides the hosting and network infrastructure for online
   multiplayer and processes connection data (such as your IP address) when you
@@ -287,7 +293,10 @@ advertising or tracking.
   access an account. Their sign-in flows can provide the identifiers, email
   and profile information described under Online Accounts. Provider processing
   also includes security and connection information, under Google's privacy
-  policy above and Apple's (<https://www.apple.com/legal/privacy/>).
+  policy above and Apple's (<https://www.apple.com/legal/privacy/>). Google's
+  iOS sign-in software declares that it may also collect identifiers, device
+  and usage information, a phone number and approximate location, partly for
+  analytics. Durak does not receive that analytics data.
 - **Apple App Store / Google Play** process payments for optional cosmetic
   purchases and distribute the app.
 

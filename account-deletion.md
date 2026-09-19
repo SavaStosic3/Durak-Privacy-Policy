@@ -5,19 +5,26 @@ permalink: /delete-account/
 
 # Delete Your Durak Account
 
-Last updated: 2026-09-10
+Last updated: 2026-09-17
 
 Online accounts in Durak are optional — you only have one if you signed in to
 play online. Offline play never requires an account.
 
 ## Delete in the app (fastest)
 
-1. Open Durak and go to **Profile → Account**.
-2. Sign in if you are not already signed in.
+1. Open Durak and go to **Profile → Online account**. If the age/Terms screen appears,
+   choose **Delete an existing account** to use your current signed-in session
+   without accepting updated Terms.
+2. If you are signed out, use the email option below, or return to the regular
+   account screen to sign in.
 3. Tap **Delete account**, then confirm. If you signed in with Google or Apple,
    you may be asked to re-confirm with that provider — no password needed.
 
-This permanently and immediately deletes your account and its data.
+When the app confirms success, the active sign-in account and the primary
+Durak account data listed below have been deleted. This cannot be undone in the
+app. If deletion is interrupted or an error appears, retry or contact support;
+starting the request does not mean every step has finished. Account closure
+does not erase every operational record or provider copy immediately.
 
 ## What is deleted
 
@@ -32,51 +39,58 @@ This permanently and immediately deletes your account and its data.
 Offline data on your device (offline stats, achievements, saved games, and
 cosmetics) is stored only on your device and is removed when you delete the app.
 
+Deleting your account does not cancel or refund a cosmetic pack you bought.
+Purchases belong to your App Store or Google Play account, not your Durak
+account, so after a reinstall you can restore them with **Restore Purchases**
+on the same store account — on the same platform you bought them on.
+
 ## What is retained
 
-When you delete your account we remove your account record and the data you
-created: your online stats and rating, your friends, friend requests, and
-blocked-users list, and — unless your account was banned — your username and its
-reservation. Three small things can remain, and a fourth if you were banned:
+Some records have a different purpose and deletion process:
 
-- **Rating records.** Each rated online match leaves one record of that match:
-  its identifier, the accounts that took part, each player's rating before and
-  after, the result, and the time. It holds no cards, deck order, or replay.
-  These records are **automatically deleted one week after the match**, so at
-  most a week's worth can outlive your account. They exist so a rating change
-  can be explained or corrected, and they describe matches other players also
-  took part in — which is why they expire on a fixed schedule rather than being
-  erased when one participant leaves.
-- **Safety records.** If you reported another player, that report is kept for
-  safety and moderation — it is about them, not you — but **your identifier is
-  removed from it** when you delete your account, so nothing links it back to
-  you. Reports other players filed *about* you are deleted outright along with
-  your account. All reports are in any case **automatically deleted 30 days
-  after they are filed**.
-- **A record that the deletion happened.** Your account identifier, the word
-  "deleted", and the time — nothing else. Your sign-in credential stays valid
-  for up to an hour after it is withdrawn, and this record is the only thing
-  that tells our server the account behind it is gone; without it, a credential
-  still in flight could bring the account back. It is **deleted automatically
-  24 hours** after the deletion completes, by which time no such credential can
-  still exist. If a deletion is interrupted part-way, this same record is what
-  lets you resume it, and it is kept for up to 30 days so that you can.
-- **A banned username.** If your account was banned for abuse before you deleted
-  it, we keep the username itself, so that nobody can claim that name again. The
-  record is the name and the date it was kept — nothing else. It holds no
-  account identifier, no email, and no link back to you, it is never shown to
-  anyone, and to other players the name simply reads as unclaimed and cannot be
-  taken. This exists so a banned player cannot return under the same name, and
-  so nobody else can take on a name other players have reason to remember. It is
-  the only thing a deletion keeps indefinitely, and only after a ban.
+- **Rating and integrity records.** Shared match records retain match and
+  participant identifiers, rating changes, outcome and timing for disputes and
+  result verification. Failed rating-update records support investigation.
+  They become eligible for automatic deletion seven days after the server
+  writes them, which can be later than the match. Rewriting a failed-update
+  record restarts its expiry. They contain no cards, deck order or replay.
+  Duplicate-credit markers also have a seven-day expiry from writing and are
+  removed with the account during successful account-data deletion.
+- **Safety records.** Reports you filed about others have your reporter
+  identifier replaced during successful account-data deletion. Reports matched
+  to your account as their subject are removed. A report about an unresolved
+  username may not be matched to an account; it follows the report expiry
+  instead. All reports become eligible for automatic deletion 30 days after
+  filing, whether reviewed or not. Removing a reporter identifier does not
+  guarantee anonymity: moderation notes can still identify people.
+- **Deletion records.** An account identifier, deletion state and timestamps
+  help block access and resume interrupted requests. A completed-deletion
+  record receives an expiry 24 hours after completion is recorded. A pending
+  record receives an expiry 30 days after the latest deletion attempt; another
+  attempt resets that pending expiry. Expiring this record does not complete a
+  failed deletion or erase remaining account data.
+- **A banned username.** Its reservation keeps the username, ban-reservation
+  status and date, without the account identifier or email, to prevent reuse
+  and impersonation. The username can still identify its former owner. There
+  is no automatic expiry; the developer reviews reservations at least
+  quarterly and on correction requests, and removes those no longer necessary
+  or created in error. Other players cannot open a profile for the reserved
+  name, and it cannot be claimed.
+- **Room and matchmaking records.** Room state, directory entries and
+  active-match reservations have a separate server-cleanup lifecycle. They can
+  contain account or guest identifiers while cleanup is outstanding, and are
+  not covered by an immediate account-deletion deadline.
 
-Rating records and reports expire on a fixed schedule rather than when one
-participant leaves: rating records one week after the match, reports 30 days
-after they are filed. The record of the deletion goes 24 hours after it
-finishes. A kept username lasts indefinitely, because a ban does.
+These expiry times make records eligible for managed database cleanup. Physical
+deletion happens asynchronously and can be delayed; the times are not guarantees
+that every copy is gone. Cloudflare logs, authentication-provider records,
+support correspondence and recovery copies follow separate retention processes
+described in the [Privacy Policy](https://savastosic3.github.io/Durak-Privacy-Policy/).
+Restored account data must be reconciled with subsequent deletion requests and
+expired records before returning to service.
 
-If another player had blocked you, that block is removed when you delete your
-account — once one side is gone it protects nobody.
+If another player had blocked you, that block is removed during successful
+account-data deletion.
 
 ## Can't open the app?
 

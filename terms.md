@@ -65,6 +65,11 @@ the Apple App Store or Google Play under their terms. Cosmetic packs are purely
 cosmetic and never affect game rules or fairness. Purchases are non-refundable
 except as required by law or the app store's policies.
 
+Purchases restore only through the platform they were bought on: a pack bought
+through the App Store restores on your Apple devices, and one bought through
+Google Play restores on your Android devices. The App keeps no purchase records
+of its own, so a purchase made on one platform cannot be restored on the other.
+
 ## 6. Termination
 
 You may stop using the App at any time and delete your account. We may suspend or
